@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medication Tracking Progress Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #9a4f8f, #457fca);
+            background-attachment: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: linear-gradient(135deg,#CFF27E, #EF959D);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .inner-box {
+            background: linear-gradient(45deg, #f3f3f3);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #ffffff, #f3f3f3);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .input-field {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .button {
+            background: linear-gradient(45deg, #4CAF50, #2E8B57);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+        .delete-button {
+            background: linear-gradient(45deg, #f44336, #8B0000);
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="inner-box">
+            <h1>Medication Tracking Progress Report</h1>
+            <form id="medicationForm">
+                <input type="date" class="input-field" id="date" required>
+                <input type="text" class="input-field" id="medication" placeholder="Medication Taken" required>
+                <input type="time" class="input-field" id="time" required>
+                <textarea class="input-field" id="notes" placeholder="Notes"></textarea>
+                <button type="button" class="button" onclick="addMedication()">Add Record</button>
+            </form>
+            <table id="medicationTable">
+                <tr>
+                    <th>Date</th>
+                    <th>Medication Taken</th>
+                    <th>Time Taken</th>
+                    <th>Notes</th>
+                    <th>Action</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function addMedication() {
+            var date = document.getElementById("date").value;
+            var medication = document.getElementById("medication").value;
+            var time = document.getElementById("time").value;
+            var notes = document.getElementById("notes").value;
+
+            var table = document.getElementById("medicationTable");
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            cell1.innerHTML = date;
+            cell2.innerHTML = medication;
+            cell3.innerHTML = time;
+            cell4.innerHTML = notes;
+            cell5.innerHTML = '<button class="delete-button" onclick="deleteRow(this)">Delete</button>';
+        }
+
+        function deleteRow(btn) {
+            var row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</body>
+</html>
