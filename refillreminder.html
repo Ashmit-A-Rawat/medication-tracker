@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescription Refill Reminder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6495ED;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Change font here */
+            color: #00897b;
+        }
+
+        label {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        input[type="date"] {
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #notification {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e91e63;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        #logo {
+            margin-top: 20px;
+            max-width: 200px; /* Adjust size as needed */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prescription Refill Reminder</h1>
+        <img id="logo" src="https://p1.hiclipart.com/preview/629/42/396/pill-icon-medical-icon-medicine-icon-electric-blue-symbol-logo-png-clipart.jpg" alt="Logo">
+        <label for="refillDate">Select Refill Date:</label>
+        <input type="date" id="refillDate">
+        <button onclick="setReminder()">Set Reminder</button>
+        <div id="notification">It's time to refill your prescription!</div>
+    </div>
+
+    <script>
+        function setReminder() {
+            var refillDate = new Date(document.getElementById('refillDate').value);
+            var now = new Date();
+            var timeUntilRefill = refillDate - now;
+
+            if (timeUntilRefill <= 0) {
+                alert('Please select a future refill date.');
+                return;
+            }
+
+            setTimeout(function showNotification() {
+                document.getElementById('notification').style.display = 'block';
+            }, timeUntilRefill);
+        }
+    </script>
+</body>
+</html>
